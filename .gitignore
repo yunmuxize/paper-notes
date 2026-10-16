@@ -1,0 +1,9 @@
+# OpenCode session data
+.opencode/
+
+# Backup files
+*.bak-*
+
+# Temp
+*.log
+__pycache__/
