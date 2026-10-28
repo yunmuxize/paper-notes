@@ -18,6 +18,10 @@
 | `OPSD_zhao26be/` | **Self-Distilled Reasoner: On-Policy Self-Distillation for Large Language Models**（单模型双角色自蒸馏，教师以特权信息为条件、学生只看问题，逐 token 散度） | 待确认 | — |
 | `OPSD-unsup_2608.06296v2/` | **On-Policy Self-Distillation without Any Supervision**（无监督版 OPD/OPSD，摆脱对外部真值/环境反馈的依赖） | `2608.06296` | — |
 
+## 研究报告
+
+- [`Skill-Retrieval-x-OPSD-研究定位报告.md`](./Skill-Retrieval-x-OPSD-研究定位报告.md) — **Skill Retrieval × OPSD：从"刷检索榜"到真正有 Hard-Agent 故事的研究定位**（2026-10-28；Skill 检索近期论文格局调研、四条选题路线评估、六篇核心精读清单）
+
 ## 工具脚本
 
 - `babeldoc-translate.sh` — 位于根目录的通用翻译脚本
