@@ -1,0 +1,186 @@
+% !TEX program = xelatex
+% 定向版：投递 Yongchao He（Alibaba，LLM Systems / AI Infra，ASK 作者）
+% 基于 cv_cn.tex，对齐方向：LLM 训练/推理系统、分布式系统容错、网内计算、异构硬件弹性部署
+% ⚠ 实习时间为占位，投递前务必核对真实日期与职责细节
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper,left=30pt,right=17pt,top=22.5pt,bottom=15pt,nohead,nofoot]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\setmainfont{Times New Roman}
+\IfFileExists{C:/Windows/Fonts/simkai.ttf}{%
+  \setCJKmainfont{KaiTi}[AutoFakeBold=3]%
+  \newCJKfontfamily\songti{SimSun}[AutoFakeBold=3]%
+}{%
+  \setCJKmainfont{AR PL UKai CN}[AutoFakeBold=3]%
+  \newCJKfontfamily\songti{Noto Serif CJK SC}[AutoFakeBold=3]%
+}
+
+\definecolor{headpurple}{HTML}{660773}
+\definecolor{rulepurple}{HTML}{6F2F9F}
+\definecolor{bodygray}{HTML}{404040}
+
+\newcommand{\bodyfont}{\fontsize{9.96}{12}\selectfont\color{bodygray}}
+\newcommand{\cvsection}[2][0pt]{%
+  \par\vspace{2.6pt}\noindent
+  \hspace{#1}{\songti\bfseries\fontsize{11.04}{12}\selectfont\color{headpurple}#2}%
+  \par\nointerlineskip\vspace{0.5pt}%
+  \noindent\hspace{5pt}\smash{\textcolor{rulepurple}{\rule{525pt}{1.05pt}}}%
+  \par\nointerlineskip\vspace{2.2pt}}
+
+\newcommand{\datemonth}[2]{\textbf{#1}{年}\textbf{#2}{月}}
+\newcommand{\daterange}[4]{\datemonth{#1}{#2}\ -\ \datemonth{#3}{#4}}
+\newcommand{\para}{\par\noindent\hspace{13.3pt}}
+\newcommand{\compitem}{\par\noindent\hspace{20.2pt}}
+\newcommand{\rightdate}[1]{\hfill\makebox[0pt][r]{\bodyfont #1}\hspace{13pt}}
+\newcommand{\projtitle}[1]{\par\noindent\hspace{5pt}{\songti\fontsize{9}{11}\selectfont\color{black}#1}}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\linespread{1}
+\setlength{\emergencystretch}{2em}
+
+\begin{document}
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north west,inner sep=0] at
+    ([xshift=26pt,yshift=-31.8pt]current page.north west)
+    {\includegraphics[width=129.2pt]{header_left.jpg}};
+  \node[anchor=north west,inner sep=0] at
+    ([xshift=492pt,yshift=-5.5pt]current page.north west)
+    {\includegraphics[width=69.5pt]{header_right.jpg}};
+\end{tikzpicture}%
+
+% ---------- 姓名区 ----------
+{\centering
+{\songti\bfseries\fontsize{15}{15}\selectfont\color{black}姚润泽}\\[4.9pt]
+{\bodyfont 政治面貌：中共党员}\\[6.9pt]
+{\bodyfont 联系方式 +86-177-5315-8846 丨 邮箱：y17753158846@outlook.com}\par}
+
+% ---------- 教育经历 ----------
+\cvsection{教育经历}
+\bodyfont
+\para 本科：东北大学（\textbf{985}）\hspace{3pt} 自动化（\textbf{A+}） （2022-2026）
+
+\para 博士研究生：清华大学\hspace{2pt} 电子信息\hspace{2pt} （2026-2031）
+
+\para 研究方向：AI Infra（LLM 训练与推理系统）
+
+\para 英语能力：六级 514 分，四级 586 分
+
+\para 技术栈：分布式训练系统（AllReduce/集合通信、容错）、LLM 推理优化（蒸馏/部署）、P4 网内计算、模型压缩
+
+% ---------- 科研经历 ----------
+\cvsection{科研经历}
+
+\noindent\hspace{5pt}{\fontsize{10.56}{12.3}\selectfont\color{black}%
+Facilitating Low-Resource Complex In-network Traffic Classification and Incremental Update via LLM-inspired Hierarchical Trainining}%
+\rightdate{\datemonth{2025}{02}\ -\ \datemonth{2025}{11}}
+\vspace{2.1pt}
+
+\bodyfont
+\para 项目目标：针对大语言模型（LLM）在资源受限环境面临的计算资源匮乏、异质硬件部署困难等核心痛点，研究并设计了一套基于 LLM 驱动的自动化任务编排与轻量化层次推理架构，以“系统-模型协同设计”打通云端高层语义智能与底层数据面线速推理性能之间的技术壁垒。
+
+\para 创新点：(1) 基于智能体的系统自动化编排：创新性地引入 LLM 专家智能体，利用思维链（Chain-of-Thought, CoT）机制将复杂的分类逻辑自动解耦为层次化子任务，构建多智能体（Multi-Agent）协同的 Actor-Critic 闭环，通过对分解策略的动态评估与优选，彻底替代依赖专家经验的人工调优。(2) LLM 能力蒸馏与轻量化部署：面向底层硬件特性设计多分支神经网络单元（NNU），将 LLM 通用推理能力有效蒸馏为可直接下发的轻量化匹配规则，支持面向新任务的 Few-Shot 增量更新，并在可编程硬件上维持线速（Line-rate）推理，兼顾精度与吞吐。
+
+\para 成果产出：成功实现了从大模型逻辑规划到边缘侧（\textbf{P4 Switch}）落地执行的全流程闭环系统原型，验证了架构的灵活性与资源高效性。研究成果已投稿至 CCF-A 类国际顶刊 IEEE Transactions on Networking（一作返修中）。
+
+\vspace{2.6pt}
+\projtitle{面向异构算力环境的弹性模型部署与自动化适配机制研究}%
+\rightdate{\datemonth{2025}{08}\ -\ \datemonth{2026}{01}}
+
+\bodyfont
+\para 项目目标：针对模型在异构硬件（Tofino/eBPF/BMV2 等异构算力）部署时面临的资源异质性与重训练高昂成本，设计基于“模型-硬件解耦”思想的自动化编译与弹性部署框架。
+
+\para 创新点：1）弹性推理架构：提出 Elastic Decision Tree (EDT) 范式，融合知识蒸馏与软硬协同剪枝算法，在零重训练（Zero-Retraining）前提下实现模型结构对流水线级数与存储资源的动态适配；2）性能建模与自动调优：构建基于回归树的细粒度资源预测模型（RMSE < 1.7\%），提出单调资源搜索遗传算法（Hierarchical GA），在多维硬约束下自动搜索最优帕累托部署方案。
+
+\para 成果：依托国家自然科学基金项目，开发了跨平台自动化部署原型系统。经 Tofino/bmv2 真实环境验证，在极端资源受限场景下，相比 SOTA 方案部署成功率提升 100\%。相关成果拟投稿至 CCF-A 类期刊《IEEE ToN》。
+
+\vspace{2.6pt}
+\projtitle{Global ATP：面向大规模分布式训练的弹性聚合与通信容错机制}%
+\rightdate{\datemonth{2026}{02}\ -\ 至今}
+
+\bodyfont
+\para 项目目标：针对大规模分布式训练中参数同步的通信瓶颈与故障容错问题（如集合通信失败、单点故障导致的整训中断），设计基于跨节点资源借用的弹性聚合架构，将碎片化空闲资源组织为瞬时缓冲池，为局部通信失败提供低开销容错路径，支撑大规模模型训练的稳定性与可靠性。
+
+\para 创新点：(1) 双角色路径锁定与单跳转发协议：设计 source/guest 双角色路径锁定机制，首包裁决后同 tuple 严格复用路径，以 sealed 状态机实现 per-tuple 粒度的槽位回收，保障参数同步的低延迟与高可靠。(2) 定向恢复与轻量协议：将故障恢复局部化至任务粒度，仅向受影响节点定向拉取部分数据，避免全局重传；设计轻量协议头集成状态管理字段，在有限带宽内实现高效同步控制。
+
+\para 成果：为大规模训练的弹性容错提供了新的设计范式；采用去中心化的容错路径设计，区别于现有分布式训练通信系统的集中式回退方案，与网内聚合的去中心化思想一脉相承。
+
+% ---------- 实习经历 ----------
+\cvsection{实习经历}
+
+\projtitle{远行光年科技有限公司\hspace{6pt}具身智能方向\hspace{2pt}研发实习生}%
+\rightdate{\datemonth{2025}{10}\ -\ 至今}
+
+\bodyfont
+\para 参与公司统一机械臂操控框架研发：面向多型号机械臂硬件设计适配层，实现上层操控算法与底层硬件解耦，新硬件零/低成本接入。
+
+\para 参与 RoboTTT（基于 Test-Time Training 的 VLA 操作策略）算法研发：负责训练与真机评测管线的搭建与调优，扩展策略模型的长时序上下文能力；并与基于 Astra 的规划模块联调，打通感知-规划-控制全链路，支撑长时序操作任务闭环。
+
+\vspace{1.6pt}
+\projtitle{清研智径\hspace{6pt}计算机方向负责人（保研辅导）}%
+\rightdate{\datemonth{2024}{09}\ -\ \datemonth{2025}{06}}
+
+\bodyfont
+\para 带领计算机/电子信息方向辅导团队，负责机器学习与系统方向学员的科研规划与一对一辅导，编写深度学习系统方向技术讲义；锻炼了技术表达与科研指导能力。
+
+% ---------- 竞赛经历 ----------
+\cvsection[5.2pt]{竞赛经历}
+
+\noindent\hspace{5.1pt}{\songti\fontsize{10.56}{12}\selectfont\color{bodygray}国家奖项五项，省级奖项十余项，采取部分奖项展示：}
+
+\bodyfont
+\compitem 第十九届全国大学生智能汽车竞赛全国总冠军（室外赛无人驾驶自行车组）\rightdate{\textbf{2024} 年\textbf{09} 月 - \textbf{2024} 年\textbf{12} 月}
+
+\compitem 第十九届全国大学生智能汽车竞赛国家一等奖（基础赛独轮组）\rightdate{\textbf{2023} 年\textbf{12} 月 - \textbf{2024} 年\textbf{08} 月}
+
+\compitem 另获同赛事国家二等奖（创意赛天途智慧救援组）、第十二届中国 triz 杯国家三等奖、第十八届“西门子杯”中国智能制造挑战赛省级二等奖、第十五届蓝桥杯省级二等奖（单片机组）等
+
+% ---------- 个人优势 ----------
+\cvsection[5.2pt]{个人优势}
+\bodyfont
+\para AI 系统全栈：在 IEEE ToN 工作中主导神经网络→可编程硬件的自动编译方案设计（知识蒸馏、特征选择、增量学习）；在异构场景下实现遗传算法驱动的多目标编译优化，打通算法→编译器→硬件完整链路。
+
+\para 大规模训练与推理系统：熟练 Python/P4，对 PyTorch、集合通信（聚合/AllReduce）及可编程边缘设备有实战经验；独立设计跨节点弹性聚合协议（Global ATP），并具身智能实习中参与 VLA 策略模型的训练与真机部署闭环，方法论可迁移至大规模分布式训练与推理服务场景。
+
+\vspace{0.7pt}
+\para 工程落地与跨领域迁移：具备学术研究与系统工程形成闭环的工作习惯，在 CCF-A 类期刊产出论文的同时，持续将算法方案落地至真实硬件完成端到端验证。这种系统方法论可自然迁移至 LLM 训练/推理系统、大模型推理加速等方向，辅以硬核竞赛经历对全栈交付能力的长期锤炼，可在 AI Infra 及相关领域快速上手。
+
+% ---------- 其他 ----------
+\cvsection[5.2pt]{其他}
+\bodyfont
+\begin{minipage}[t]{0.591\textwidth}
+2026 年东北大学优秀毕业生
+\end{minipage}%
+\begin{minipage}[t]{0.409\textwidth}
+2026 年东北大学就业之星（升学类）
+\end{minipage}
+
+\vspace{0.7pt}
+\begin{minipage}[t]{0.591\textwidth}
+2024 年11 月优秀学生干部
+\end{minipage}%
+\begin{minipage}[t]{0.409\textwidth}
+2024 年5 月优秀团干部标兵
+\end{minipage}
+
+\begin{minipage}[t]{0.591\textwidth}
+2024 年3 月创新创业工作优秀学生干部
+\end{minipage}%
+\begin{minipage}[t]{0.409\textwidth}
+2023 年11 月三好学生
+\end{minipage}
+
+\begin{minipage}[t]{0.591\textwidth}
+2023 年11 月志愿服务之星
+\end{minipage}%
+\begin{minipage}[t]{0.409\textwidth}
+2023 年5 月优秀团员
+\end{minipage}
+
+\end{document}

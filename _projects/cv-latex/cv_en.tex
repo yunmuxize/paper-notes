@@ -1,0 +1,172 @@
+% !TEX program = xelatex
+% English version of CV——AI infra.pdf — same layout system as cv_cn.tex
+% (BabelDOC/PyMuPDF span-level analysis: fonts, sizes, colors, coordinates)
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper,left=30pt,right=17pt,top=22.5pt,bottom=15pt,nohead,nofoot]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\setmainfont{Times New Roman}
+\IfFileExists{C:/Windows/Fonts/simkai.ttf}{%
+  \setCJKmainfont{KaiTi}[AutoFakeBold=3]%
+  \newCJKfontfamily\songti{SimSun}[AutoFakeBold=3]%
+}{%
+  \setCJKmainfont{AR PL UKai CN}[AutoFakeBold=3]%
+  \newCJKfontfamily\songti{Noto Serif CJK SC}[AutoFakeBold=3]%
+}
+
+\definecolor{headpurple}{HTML}{660773}
+\definecolor{rulepurple}{HTML}{6F2F9F}
+\definecolor{bodygray}{HTML}{404040}
+
+% English body: 9.5pt/11.4pt (compact — English runs longer than Chinese)
+\newcommand{\bodyfont}{\fontsize{9.5}{11.4}\selectfont\color{bodygray}}
+\newcommand{\cvsection}[2][0pt]{%
+  \par\vspace{2.6pt}\noindent
+  \hspace{#1}{\bfseries\fontsize{11.04}{12}\selectfont\color{headpurple}#2}%
+  \par\nointerlineskip\vspace{0.5pt}%
+  \noindent\hspace{5pt}\smash{\textcolor{rulepurple}{\rule{525pt}{1.05pt}}}%
+  \par\nointerlineskip\vspace{2.2pt}}
+
+\newcommand{\daterange}[2]{\textbf{#1 -- #2}}
+\newcommand{\para}{\par\noindent\hspace{13.3pt}}
+\newcommand{\compitem}{\par\noindent\hspace{20.2pt}}
+\newcommand{\rightdate}[1]{\hfill\makebox[0pt][r]{\bodyfont #1}\hspace{13pt}}
+\newcommand{\projtitle}[1]{\par\noindent\hspace{5pt}{\fontsize{9}{10.8}\selectfont\color{black}#1}}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\linespread{1}
+\setlength{\emergencystretch}{2em}
+
+\begin{document}
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north west,inner sep=0] at
+    ([xshift=26pt,yshift=-31.8pt]current page.north west)
+    {\includegraphics[width=129.2pt]{header_left.jpg}};
+  \node[anchor=north west,inner sep=0] at
+    ([xshift=492pt,yshift=-5.5pt]current page.north west)
+    {\includegraphics[width=69.5pt]{header_right.jpg}};
+\end{tikzpicture}%
+
+% ---------- Name block ----------
+{\centering
+{\bfseries\fontsize{15}{15}\selectfont\color{black}Runze Yao}\\[4.9pt]
+{\bodyfont Political Status: Member of the Communist Party of China}\\[6.9pt]
+{\bodyfont Contact: +86-177-5315-8846 \;|\; Email: y17753158846@outlook.com}\par}
+
+% ---------- Education ----------
+\cvsection{Education}
+\bodyfont
+\para B.Eng.: Northeastern University (\textbf{985})\hspace{3pt} Automation (\textbf{A+}) (2022--2026)
+
+\para Ph.D. Candidate: Tsinghua University\hspace{2pt} Electronic Information (2026--2031)
+
+\para Research Focus: AI Infrastructure
+
+\para English Proficiency: CET-6: 514, CET-4: 586
+
+\para Tech Stack: P4, model compression, distributed training systems, real-time inference optimization
+
+% ---------- Research Experience ----------
+\cvsection{Research Experience}
+
+\noindent\hspace{5pt}{\fontsize{10.56}{12.3}\selectfont\color{black}%
+Facilitating Low-Resource Complex In-network Traffic Classification and Incremental Update via LLM-inspired Hierarchical Trainining}%
+\rightdate{\daterange{Feb 2025}{Nov 2025}}
+
+\bodyfont
+\para Objective: Targeting the scarce compute and heterogeneous-hardware deployment challenges of LLMs on edge network devices, designed an LLM-driven automated task-orchestration and lightweight hierarchical inference architecture that bridges high-level cloud semantic intelligence and line-rate data-plane performance.
+
+\para Innovations: (1) Agent-based automated task orchestration: introduced LLM expert agents that decouple complex traffic-classification logic into hierarchical subtasks via Chain-of-Thought (CoT), and built a multi-agent Actor--Critic scheme that dynamically evaluates and iteratively refines decomposition strategies, fully replacing expert-driven manual feature engineering. (2) Multi-branch Neural Network Unit (NNU): designed a multi-branch NNU for data-plane hardware that distills LLM general reasoning into lightweight deployable matching rules; supports few-shot incremental updates for new traffic patterns while sustaining line-rate inference on programmable hardware, balancing accuracy and throughput.
+
+\para Outcome: Delivered a closed-loop prototype from LLM-based planning to execution on \textbf{P4 switches}; submitted to IEEE Transactions on Networking (CCF-A; first author, under revision).
+
+\vspace{2.6pt}
+\projtitle{Elastic Traffic Analysis and Automated Deployment across Heterogeneous Data Planes}%
+\rightdate{\daterange{Aug 2025}{Jan 2026}}
+
+\bodyfont
+\para Objective: Targeting resource heterogeneity and high retraining costs when deploying traffic-analysis models across heterogeneous data planes (Tofino/eBPF/BMV2), designed an automated compilation and elastic adaptation architecture based on model--hardware decoupling.
+
+\para Innovations: 1) Elastic inference: proposed the Elastic Decision Tree (EDT) paradigm, fusing knowledge distillation with software--hardware co-pruning so that model structure dynamically adapts to pipeline stages and storage resources with zero retraining; 2) Constraint-driven orchestration: built a fine-grained regression-tree resource predictor (RMSE < 1.7\%) and a monotonic resource-search genetic algorithm (Hierarchical GA) that finds Pareto-optimal feature-matching and topology designs under TCAM/SRAM/Stage constraints.
+
+\para Outcome: Developed a cross-platform orchestration prototype under an NSFC project; validated in real Tofino/BMV2 environments, improving deployment success rate by 100\% over SOTA in extremely resource-constrained scenarios; to be submitted to IEEE ToN (CCF-A).
+
+\vspace{2.6pt}
+\projtitle{Elastic Aggregation and Efficient Communication for Large-Scale Distributed Training}%
+\rightdate{\daterange{Feb 2026}{Present}}
+
+\bodyfont
+\para Objective: Targeting communication bottlenecks and single points of failure in parameter synchronization for large-scale distributed training, designed an elastic aggregation architecture based on cross-node resource borrowing that organizes fragmented idle resources into transient buffer pools, providing low-overhead fault-tolerant paths for partial communication failures.
+
+\para Innovations: (1) Dual-role path locking with single-hop forwarding: a source/guest path-locking mechanism that strictly reuses paths for the same tuple after first-packet adjudication, with a sealed state machine for per-tuple slot reclamation, ensuring low-latency, highly reliable parameter synchronization. (2) Directed recovery with lightweight protocol: recovery is localized to task granularity---only partial data is pulled from affected nodes, avoiding global retransmission; a lightweight protocol header integrates state management for efficient synchronization within limited bandwidth.
+
+\para Outcome: A new design paradigm for elastic fault tolerance in in-network aggregation, distinct from the centralized fallback paths of existing distributed-training communication systems.
+
+% ---------- Honors & Awards ----------
+\cvsection[5.2pt]{Honors \& Awards}
+
+\noindent\hspace{5.1pt}{\fontsize{10.06}{12}\selectfont\color{bodygray}5 national awards and 10+ provincial awards; selected entries:}
+
+\bodyfont
+\compitem National Champion, 19th National College Student Intelligent Car Contest (outdoor driverless bicycle)\rightdate{\daterange{Sep 2024}{Dec 2024}}
+
+\compitem National First Prize, 19th National College Student Intelligent Car Contest (unicycle group)\rightdate{\daterange{Dec 2023}{Aug 2024}}
+
+\compitem National Second Prize, 19th National College Student Intelligent Car Contest (Tiantu Smart Rescue)\rightdate{\daterange{Apr 2024}{Aug 2024}}
+
+\compitem National Third Prize, 12th China TRIZ Cup Innovation Method Contest (life creativity track)\rightdate{\daterange{Mar 2024}{Jul 2024}}
+
+\compitem Provincial Second Prize, 18th ``Siemens Cup'' China Intelligent Manufacturing Challenge (process industry)\rightdate{\daterange{Dec 2023}{Aug 2024}}
+
+\compitem Provincial Second Prize, 15th Lanqiao Cup National Software \& IT Talent Contest (MCU group)\rightdate{\daterange{Dec 2023}{May 2024}}
+
+% ---------- Strengths ----------
+\cvsection[5.2pt]{Strengths}
+\bodyfont
+\para Full-stack AI systems: led the neural-network $\rightarrow$ programmable-hardware automated compilation design (knowledge distillation, feature selection, incremental learning) in the IEEE ToN work; implemented GA-driven multi-objective compilation optimization for heterogeneous targets, closing the algorithm $\rightarrow$ compiler $\rightarrow$ hardware loop.
+
+\vspace{0.7pt}
+\para System performance optimization: proficient in Python/P4; hands-on experience with PyTorch, distributed communication (aggregation/AllReduce) and programmable edge devices; independently designed the cross-node elastic aggregation protocol, transferable to large-scale distributed training.
+
+\para Engineering delivery \& cross-domain transfer: maintains a closed loop between academic research and system engineering---publishing in CCF-A venues while landing algorithms on real hardware for end-to-end validation. Compiler-design and distributed-optimization methods transfer naturally to GPU kernel development and LLM inference acceleration, backed by hardcore competition experience in full-stack delivery.
+
+% ---------- Others ----------
+\cvsection[5.2pt]{Others}
+\bodyfont
+\begin{minipage}[t]{0.591\textwidth}
+2026 Outstanding Graduate of Northeastern University
+\end{minipage}%
+\begin{minipage}[t]{0.409\textwidth}
+2026 Employment Star of NEU (postgraduate track)
+\end{minipage}
+
+\vspace{0.7pt}
+\begin{minipage}[t]{0.591\textwidth}
+Nov 2024\quad Outstanding Student Leader
+\end{minipage}%
+\begin{minipage}[t]{0.409\textwidth}
+May 2024\quad Model League Branch Cadre
+\end{minipage}
+
+\begin{minipage}[t]{0.591\textwidth}
+Mar 2024\quad Outstanding Student Leader (Innovation \& Entrepreneurship)
+\end{minipage}%
+\begin{minipage}[t]{0.409\textwidth}
+Nov 2023\quad Merit Student
+\end{minipage}
+
+\begin{minipage}[t]{0.591\textwidth}
+Nov 2023\quad Volunteer Service Star
+\end{minipage}%
+\begin{minipage}[t]{0.409\textwidth}
+May 2023\quad Active League Member
+\end{minipage}
+
+\end{document}
