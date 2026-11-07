@@ -41,6 +41,8 @@ Paper/
 | `ACE_2510.04618/` | **Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models**（不断积累、整理、修订经验 / Context-Playbook） | `2510.04618` | ICLR 2026 |
 | `OPSD_zhao26be/` | **Self-Distilled Reasoner: On-Policy Self-Distillation for Large Language Models**（单模型双角色自蒸馏，教师以特权信息为条件、学生只看问题，逐 token 散度） | 待确认 | — |
 | `OPSD-unsup_2608.06296v2/` | **On-Policy Self-Distillation without Any Supervision**（无监督版 OPD/OPSD，摆脱对外部真值/环境反馈的依赖） | `2608.06296` | — |
+| `ARXIV_2506.22033/` | **SiPipe: Bridging the CPU–GPU Utilization Gap for Efficient Pipeline-Parallel LLM Inference**（流水线并行 LLM 推理；CPU 卸载辅助计算/通信，消 load-imbalance / intra-stage / inter-stage 三类 bubble） | `2506.22033` | arXiv 2025-06 |
+| `LMTRACER_SOSP26/` | **LMTracer: Fine-Grained and Real-Time Performance Profiling for Production LLM Systems**（生产 LLM 系统细粒度实时性能剖析；细粒度低侵入） | DOI: 待确认 | SOSP 2026 |
 
 ## 研究文档（`_documents/`）
 
