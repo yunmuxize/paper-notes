@@ -1,7 +1,7 @@
 # DeepSeek 精读对话存档 — ASK (ASPLOS 2023)
 
 > 来源: https://chat.deepseek.com/share/4shj123tcwm5oeb65y
-> 抓取日期: 2026-11-09 ｜ 共 58 条消息（用户 29 条提问）
+> 抓取日期: 2026-11-09 ｜ 配图: 论文原图（figures/），按讨论主题插入 ｜ 共 58 条消息（用户 29 条提问）
 
 ---
 
@@ -69,6 +69,9 @@ ASK 由主机侧守护进程和交换机侧聚合功能组成：
 ---
 
 ## [用户] #5
+
+> 🖼 **Figure 1 — Example of Aggregation Patterns**（聚合模式示例：KV 流聚合在 MapReduce / 分布式训练 / 数据库中的不同形态，对应你第 1、2 问的背景）
+> ![Figure 1: Example of Aggregation Patterns](figures/fig_p02_image_9.png)
 
 聚合多个键值流是一种广泛存在于各种分布式系统中的操作,例 如,reduce() 在大数据中 [7, 29,68], AllReduce() 在分布式训练中  [32, 47, 61, 67], MPI_Reduce()在高性能计算(HPC)中 [12, 46], SUM() 在数据库中 [17, 48, 64], 等等。聚合操作可能会在计算、 磁盘 IO 和网络上需要大量资源 [56, 69],并且可能主导许多工作 负载的整体性能。例如,在分布式训练中,梯度聚合最多可占用 训练时间的 79% [61], 而在典型的 MapReduce 作业(如 WordCount)中,ReduceByKey() 操作耗费了 94.67% 的时间 [37]。 此外,与 Reduce 相关的集合函数是数百个开源 HPC 应用中最 为重要且最耗时的运算符 [46]。
 请你讲解一下文中提到的几种常见的聚合形式
@@ -663,6 +666,12 @@ MPI 的 `AllReduce()` / `Reduce()` 和 MapReduce 的 Reduce 看起来都叫“�
 
 ## [用户] #15
 
+> 🖼 **Figure 2 — Protocol Independent Switch Architecture (PISA)**（可编程交换机流水线：一个包依次经过多个 match-action 阶段，每阶段的寄存器/ALU 一次只能读写一次——这就是"多键向量化"挑战的硬件根源）
+> ![Figure 2: PISA](figures/fig_p03_image_2.png)
+
+> 🖼 **Figure 3 — AKV/s on a single machine**（单机聚合吞吐：单键包 vs 多键包向量化后的差距，挑战 1 的量化动机）
+> ![Figure 3: AKV/s](figures/fig_p04_image_2.png)
+
 请你解读一下以下这三个挑战
 首先,系统需要在一个交换机流水线处理过程中对一个数 据包的多元组聚合进行向量化,以提升系统有效吞吐量。然而, 协议无关交换机架构(PISA)提供的交换机可编程性和内存 访问模式 [23] 限制了这种向量化。ASK 协同设计交换机内存 布局和主机数据包化,以实现向量化,并在真实工作负载中支 持变长键(§3.2)。其次,系统需要一种专门针对异步聚合的 可靠性机制;但现有解决方案都无法正确运行,而且向量化数 据包聚合进一步复杂化了交换机状态和逻辑。ASK 精心设计 了主机滑动窗口方案和交换机去重逻辑,以实现可靠性和正确 性,并通过复用主机服务中的持久连接进一步提高系统可扩展 性(§3.3)。第三,交换机必须在运行时根据键对交换机内存 进行寻址。然而,在实际的键分布偏斜工作负载中,当冷键先 预留交换机内存时,可能会导致交换机内存利用率低下。 ASK 设计了一种影子副本机制,定期从交换机获取中间结果 并重置交换机内存,使热键有机会第二次预留交换机内存( §3.4)。
 
@@ -846,6 +855,9 @@ PISA 限制每个 stage 一次只处理一个包，所以切换通知包处理�
 ---
 
 ## [用户] #17
+
+> 🖼 **Figure 6 — Switch memory layout with the aggregators (AAs)**（交换机内存布局：多个聚合器数组 AA 并列，一个 pass 各访问一次；冷键占坑与 Shadow Copy 切换也发生在这些 AA 槽位上——对应你第 7、8 问及后面"50% 内存"的追问）
+> ![Figure 6: Switch memory layout](figures/fig_p06_image_8.png)
 
 这样交换机一个 pass 可以同时访问多个 AA，每个 AA 只读写一次，绕过“一个数组只能读写一次”的限制。这个限制是怎么进行突破的呢
 把物理相邻的多个 AA 合并成一组，存储整个长键值元组；
@@ -1227,6 +1239,9 @@ ASK 的解决办法就是你说的：**把一个包里的多个键值，分别�
 
 ## [用户] #21
 
+> 🖼 **Figure 7 / Figure 8（先行预览）**——strawman 对比与多键设计的 goodput 影响在第 10 页实验部分，等讲到效果时回看：
+> ![Figure 8: multi-key goodput](figures/fig_p10_image_8.png)
+
 Strawman Solution. We present a strawman solution demonstrating the performance gain of offloading key-value stream aggregation to the switch. Since there is no end-to-end system designed yet, we make three assumptions to simplify the design of the strawman solution.
 稻草人方案是一种学术名词吗
 
@@ -1378,6 +1393,9 @@ Strawman Solution. We present a strawman solution demonstrating the performance 
 
 ## [用户] #27
 
+> 🖼 **Figure 4 — Overview of ASK**（系统总览：sender daemon 打包 KV 元组 → 交换机 best-effort 聚合 → receiver daemon 收敛到共享内存，host 保证正确性）
+> ![Figure 4: Overview of ASK](figures/fig_p05_image_2.png)
+
 > 📄 附件: 截屏 2026-11-08 at 23.29.30.png
 
 请你解读讲解一下图片
@@ -1453,6 +1471,9 @@ Strawman Solution. We present a strawman solution demonstrating the performance 
 ---
 
 ## [用户] #29
+
+> 🖼 **Figure 5 — An aggregation example in ASK**（聚合时序示例：ASK 包格式、多 sender 对同一 key 的元组在交换机 AA 槽位聚合、teardown 输出的完整过程——下面两问正是围绕这张图展开）
+> ![Figure 5: An aggregation example](figures/fig_p05_image_8.png)
 
 > 📄 附件: 截屏 2026-11-09 at 00.03.25.png
 

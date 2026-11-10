@@ -253,7 +253,7 @@ strawman 的 5× 到 ASK 的 155× 之间，绝大部分差距来自这笔账 + 
 **M1 验证（§5.3）**：goodput 随每包 tuple 数近线性上升，32 以后贴合理论值（受 host PPS 与 PCIe TLP 对齐的毛刺）；最差 trace（yelp）平均每包仍有 16.91 个非空 slot——key 子空间划分在偏斜负载下有槽位浪费，但没到抵消收益的程度。
 
 **M3 验证（§5.4，直接回应我的 Q7 攻击点）**：
-![有无优先级对比](figures/fig_p10_image_8.png)
+![Figure 9：有无优先级对比](figures/fig_p11_figure9.png)
 *Figure 9：左（无优先级）：aggregator 数量不足时 INA 比例骤降，且 Zipf(reverse) 最惨；右（有优先级）：aggregator:distinct-key = 1:16 仍达 95.85%。*
 
 - 无优先级：冷 key 占槽到任务结束，aggregator 不够时大量 tuple 回退 host；
